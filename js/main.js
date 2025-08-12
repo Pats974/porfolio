@@ -13,10 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   faders.forEach(fader => observer.observe(fader));
 
+  const slides = document.querySelectorAll('.hero-slider img');
+  let currentSlide = 0;
+  if (slides.length > 0) {
+    setInterval(() => {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }, 5000);
+  }
+
   window.addEventListener('scroll', () => {
-    const video = document.querySelector('.hero video');
-    if (video) {
-      video.style.transform = `translateY(${window.pageYOffset * 0.3}px)`;
+    const slider = document.querySelector('.hero-slider');
+    if (slider) {
+      slider.style.transform = `translateY(${window.pageYOffset * 0.3}px)`;
     }
   });
 });
